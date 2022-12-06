@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import "./App.css";
+import { Form } from "./components/Form/Form";
 import { data } from "./data/facts";
 
 export type DogFactType = {
@@ -31,11 +32,12 @@ function App() {
     setError(err);
     console.log(err);
   });
-  console.log("datafact", dataFact);
+  console.log("data Fact", dataFact);
   console.log("err", error);
   return (
     <div className="App">
       <header className="App-header"></header>
+      <Form data={dataFact} />
     </div>
   );
 }
