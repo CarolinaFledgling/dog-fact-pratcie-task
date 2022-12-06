@@ -10,7 +10,7 @@ export type DogFactType = {
 };
 
 function App() {
-  const [dataFact, setDataFact] = useState<DogFactType[] | null>(null);
+  const [dataFact, setDataFact] = useState<DogFactType[] | []>([]);
   const [error, setError] = useState(null);
 
   const MyPromiseToFetchFacts: Promise<DogFactType[]> = new Promise(function (
