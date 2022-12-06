@@ -1,24 +1,41 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import "./App.css";
+import { data } from "./data/facts";
+
+export type DogFactType = {
+  id: number;
+  fact: string;
+};
 
 function App() {
+  const [dataFact, setDataFact] = useState<DogFactType[] | null>(null);
+  const [error, setError] = useState(null);
+
+  const MyPromiseToFetchFacts: Promise<DogFactType[]> = new Promise(function (
+    myResolve,
+    myRejects
+  ) {
+    if (data) {
+      setTimeout(() => {
+        myResolve(data);
+      }, 2000);
+    } else {
+      myRejects("no data");
+    }
+  });
+
+  MyPromiseToFetchFacts.then((data) => {
+    setDataFact(data);
+  }).catch((err) => {
+    setError(err);
+    console.log(err);
+  });
+  console.log("datafact", dataFact);
+  console.log("err", error);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <header className="App-header"></header>
     </div>
   );
 }
